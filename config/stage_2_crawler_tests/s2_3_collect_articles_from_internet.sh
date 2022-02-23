@@ -2,7 +2,7 @@ set -ex
 
 echo "Stage: Downloading articles"
 
-python config/config_param_changer.py
+python python config/config_param_changer.py --config_path="scrapper_config.json"
 
 echo "Changed config params"
 

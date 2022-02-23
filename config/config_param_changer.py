@@ -2,9 +2,18 @@
 Changes num_article param with random number in range(2, 7)
 """
 
+import argparse
 import json
 import random
-from test_params import PARENT_CONFIG
+
+
+def parser():
+    parser = argparse.ArgumentParser(description=' ')
+    parser.add_argument('--config_path',
+                        type=str,
+                        required=True,
+                        help='Full path to the scrapper config file')
+    return parser
 
 
 def change_volume(config: str):
@@ -19,4 +28,5 @@ def change_volume(config: str):
 
 
 if __name__ == "__main__":
-    change_volume(PARENT_CONFIG)
+    args = parser().parse_args()
+    change_volume(args.config_path)
