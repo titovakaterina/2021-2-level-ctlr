@@ -5,7 +5,7 @@ echo "Stage: Downloading articles"
 echo "Adding $(pwd) to PYTHONPATH"
 export PYTHONPATH=$(pwd):$PYTHONPATH
 
-python config/change_pdf_config_launcher.py
+python python config/config_param_changer.py --config_path="config/test_files/scrapper_config_separate_pdf.json"
 
 echo "Changed config params"
 
