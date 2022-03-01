@@ -7,4 +7,4 @@ if [[ -z "$TARGET_SCORE" ]]; then
   exit 1
 fi
 
-echo "TARGET_SCORE for pipeline: ${TARGET_SCORE}"
+echo ${TARGET_SCORE}

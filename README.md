@@ -16,7 +16,7 @@ Instructors:
 * [Lyashevskaya Olga Nikolaevna](https://www.hse.ru/staff/olesar) - linguistic track lecturer
 * [Demidovskij Alexander Vladimirovich](https://www.hse.ru/staff/demidovs#sci) - technical track lecturer
 * [Uraev Dmitry Yurievich](https://www.hse.ru/org/persons/208529395) - technical track practice lecturer
-* [Kaziulina Marina Sergeevna](https://nnov.hse.ru/news/365778981.html) - technical track assistant
+* [Kazyulina Marina Sergeevna](https://t.me/poemgranate) - technical track assistant
 
 ## Project Timeline
 
