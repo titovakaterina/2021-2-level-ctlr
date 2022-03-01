@@ -512,7 +512,7 @@ visualize(statistics=frequencies_dict, path_to_save='./tmp/articles/1_image.png'
 
 #### Stage 8.3. Refactor your own code to use `pathlib`
 
-> NOTE: !!! pathlib to be used from early beginning !!!
+> NOTE: !!! `pathlib` to be used from early beginning !!!
 
 As we discussed during lectures it is always better to have something designed specifically for the
 given task. Comparing `os` and `pathlib` modules, the latter is the one that is designed for most of

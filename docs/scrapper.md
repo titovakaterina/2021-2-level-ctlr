@@ -336,4 +336,4 @@ continues search and crawling process without repetitions.
 > HINT: think of storing intermediate information in one or few files? What information do you
 > need to store?
 
-> NOTE: !!! Monolithic PDFs !!!
+> NOTE: !!! Monolithic PDF files !!!
