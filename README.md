@@ -41,7 +41,8 @@ Instructors:
 
 |Date|Lecture topic|Important links|
 |:--:|:---|:---|
-|21.02.2022|Topic|Link|
+|21.02.2022|Exceptions: built-in and custom for error handling and information exchange|[Introduction tutorial](https://realpython.com/python-exceptions/|
+|25.02.2022|Programming assignment: main concept and implementation details|**N/A**|
 
 ## Technical solution
 
