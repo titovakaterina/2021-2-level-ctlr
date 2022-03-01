@@ -104,7 +104,7 @@ python -m pip install -r requirements.txt
    1. Stage 4.1. Frequency visualization
    
 
-## Synchronizing between admin and public repo
+## Synchronizing between admin and public repository
 
 1. Run the following command (macOS specific):
  
