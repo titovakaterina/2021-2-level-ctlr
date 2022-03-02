@@ -2,7 +2,7 @@ set -ex
 
 echo "Stage: Downloading articles"
 
-python python config/config_param_changer.py --config_path="scrapper_config.json"
+python config/config_param_changer.py --config_path="scrapper_config.json"
 
 echo "Changed config params"
 
@@ -16,9 +16,9 @@ TARGET_SCORE=$(bash config/get_scrapper_target_score.sh)
 
 if [[ ${TARGET_SCORE} == 4 ]]; then
   echo "Running score four checks"
-  python -m pytest -m "mark4 and stage_2_3_dataset_volume_check"
+  python -m pytest -m "mark4 and stage_2_4_dataset_volume_check"
 else
-  python -m pytest -m "mark10 and stage_2_3_dataset_volume_check"
+  python -m pytest -m "mark10 and stage_2_4_dataset_volume_check"
 fi
 
 echo "Volume is correct"

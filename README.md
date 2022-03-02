@@ -16,7 +16,7 @@ Instructors:
 * [Lyashevskaya Olga Nikolaevna](https://www.hse.ru/staff/olesar) - linguistic track lecturer
 * [Demidovskij Alexander Vladimirovich](https://www.hse.ru/staff/demidovs#sci) - technical track lecturer
 * [Uraev Dmitry Yurievich](https://www.hse.ru/org/persons/208529395) - technical track practice lecturer
-* [Kaziulina Marina Sergeevna](https://nnov.hse.ru/news/365778981.html) - technical track assistant
+* [Kazyulina Marina Sergeevna](https://t.me/poemgranate) - technical track assistant
 
 ## Project Timeline
 
@@ -41,7 +41,7 @@ Instructors:
 
 |Date|Lecture topic|Important links|
 |:--:|:---|:---|
-|21.02.2022|Exceptions: built-in and custom for error handling and information exchange|[Introduction tutorial](https://realpython.com/python-exceptions/|
+|21.02.2022|Exceptions: built-in and custom for error handling and information exchange|[Introduction tutorial](https://realpython.com/python-exceptions/)|
 |25.02.2022|Programming assignment: main concept and implementation details|**N/A**|
 
 ## Technical solution
