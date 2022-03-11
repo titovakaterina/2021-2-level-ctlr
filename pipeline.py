@@ -92,8 +92,15 @@ def validate_dataset(path_to_validate):
 
 
 def main():
-    # YOUR CODE HERE
-    pass
+    import requests
+
+    def main():
+        response = requests.get('https://lgz.ru/')
+
+        with open('index.html', 'w', encoding='UTF-8') as f:
+            f.write(response.text)
+
+    main()
 
 
 if __name__ == "__main__":
