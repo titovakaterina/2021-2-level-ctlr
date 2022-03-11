@@ -5,7 +5,7 @@ Pipeline for text processing implementation
 
 class EmptyDirectoryError(Exception):
     """
-    No data to process
+    No_data to process
     """
 
 
