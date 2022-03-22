@@ -51,7 +51,7 @@ class Crawler:
             urls_bs_full.append(f'{beginning_of_link}{not_full_link}')
 
         for full_url in urls_bs_full:
-            if len(self.urls) < self.max_articles:
+            if len(self.urls) < self.max_articles and 'nauchno-populyarnaya_biblioteka' not in full_url:
                 self.urls.append(full_url)
 
         return urls_bs_full
@@ -101,8 +101,9 @@ class HTMLParser:
     def _fill_article_with_text(self, article_bs):
         divs = article_bs.find('div', class_='memo')
         ps = divs.find_all('p')
+        self.article.text = ''
         for p in ps:
-            self.article.text += p.text.strip()
+            self.article.text += p.text
 
     def parse(self):
         response = requests.get(url=self.article_url)
@@ -153,13 +154,17 @@ def validate_config(crawler_path):
 if __name__ == '__main__':
     seed_urls_test, total_articles_test = validate_config(CRAWLER_CONFIG_PATH)
     prepare_environment(ASSETS_PATH)
-    #
-    # crawler = Crawler(seed_urls_test, total_articles_test)
-    # crawler.find_articles()
-    #
-    # ID = 0
-    # for article_url_test in crawler.urls:
-    #     ID += 1
-    #     article_parser = HTMLParser(article_url=article_url_test, article_id=ID)
-    #     article = article_parser.parse()
-    #     article.save_raw()
+
+    crawler = Crawler(seed_urls_test, total_articles_test)
+    crawler.find_articles()
+
+    ID = 0
+    for article_url_test in crawler.urls:
+        ID += 1
+        article_parser = HTMLParser(article_url=article_url_test, article_id=ID)
+        try:
+            article = article_parser.parse()
+            article.save_raw()
+        except:
+            print(article_parser.article.url)
+
