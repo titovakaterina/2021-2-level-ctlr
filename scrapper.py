@@ -3,12 +3,12 @@ Scrapper implementation
 """
 from datetime import datetime
 import json
+from pathlib import Path
 import re
 import shutil
-from pathlib import Path
 
-import requests
 from bs4 import BeautifulSoup
+import requests
 
 from constants import CRAWLER_CONFIG_PATH, ASSETS_PATH
 from core_utils.article import Article
@@ -52,7 +52,8 @@ class Crawler:
 
         for full_url in urls_bs_full:
             if len(self.urls) < self.max_articles and 'nauchno-populyarnaya_biblioteka' not in full_url:
-                self.urls.append(full_url)
+                if full_url not in self.urls:
+                    self.urls.append(full_url)
 
         return urls_bs_full
 
@@ -137,7 +138,16 @@ def validate_config(crawler_path):
     if not seed_urls:
         raise IncorrectURLError
 
-    if not isinstance(max_articles, int) or max_articles <= 0:
+    if not isinstance(seed_urls, list):
+        raise IncorrectURLError
+
+    if len(seed_urls) == 0:
+        raise IncorrectURLError
+
+    if not isinstance(max_articles, int):
+        raise IncorrectNumberOfArticlesError
+
+    if max_articles <= 0:
         raise IncorrectNumberOfArticlesError
 
     if max_articles > 200:
