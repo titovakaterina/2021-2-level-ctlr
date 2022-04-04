@@ -101,10 +101,10 @@ class HTMLParser:
 
     def _fill_article_with_text(self, article_bs):
         divs = article_bs.find('div', class_='memo')
-        ps = divs.find_all('p')
+        ps_tags = divs.find_all('p')
         self.article.text = ''
-        for p in ps:
-            self.article.text += p.text
+        for p_tag in ps_tags:
+            self.article.text += p_tag.text
 
     def parse(self):
         response = requests.get(url=self.article_url)
@@ -141,9 +141,6 @@ def validate_config(crawler_path):
     if not isinstance(seed_urls, list):
         raise IncorrectURLError
 
-    if len(seed_urls) == 0:
-        raise IncorrectURLError
-
     if not isinstance(max_articles, int):
         raise IncorrectNumberOfArticlesError
 
@@ -169,12 +166,7 @@ if __name__ == '__main__':
     crawler.find_articles()
 
     ID = 0
-    for article_url_test in crawler.urls:
-        ID += 1
-        article_parser = HTMLParser(article_url=article_url_test, article_id=ID)
-        try:
-            article = article_parser.parse()
-            article.save_raw()
-        except:
-            print(article_parser.article.url)
-
+    for ID, article_url_test in enumerate(crawler.urls):
+        parser = HTMLParser(article_url_test, ID+1)
+        article_parser = parser.parse()
+        article_parser.save_raw()
