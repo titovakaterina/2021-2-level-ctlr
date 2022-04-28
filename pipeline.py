@@ -161,11 +161,11 @@ def validate_dataset(path_to_validate):
 
             if f'{texts}_raw' not in file.name:
                 raise InconsistentDatasetError
-            #
-            # with open(file, 'r', encoding='utf-8') as current:
-            #     text = current.read()
-            # if not text:
-            #     raise InconsistentDatasetError
+
+            with open(file, 'r', encoding='utf-8') as current:
+                text = current.read()
+            if not text:
+                raise InconsistentDatasetError
 
         if file.name.endswith('meta.json'):
             meta_data += 1
