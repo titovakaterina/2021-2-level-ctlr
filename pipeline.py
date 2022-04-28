@@ -172,6 +172,7 @@ def validate_dataset(path_to_validate):
 
     if texts != meta_data:
         raise InconsistentDatasetError
+        # comment
 
 
 def main():
