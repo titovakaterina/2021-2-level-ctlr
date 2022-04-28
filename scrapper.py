@@ -75,7 +75,7 @@ class Crawler:
         """
         Returns seed_urls param
         """
-        pass
+        return self.seed_urls
 
 
 class HTMLParser:
@@ -102,9 +102,11 @@ class HTMLParser:
     def _fill_article_with_text(self, article_bs):
         divs = article_bs.find('div', class_='memo')
         ps_tags = divs.find_all('p')
-        self.article.text = ''
+        raw_text = ''
         for p_tag in ps_tags:
-            self.article.text += p_tag.text
+            raw_text += p_tag.text
+        raw_text_without_source = raw_text.split("Источник:")[0]
+        self.article.text = raw_text_without_source
 
     def parse(self):
         response = requests.get(url=self.article_url)
@@ -164,9 +166,7 @@ if __name__ == '__main__':
 
     crawler = Crawler(seed_urls_test, total_articles_test)
     crawler.find_articles()
-
-    ID = 0
-    for ID, article_url_test in enumerate(crawler.urls):
-        parser = HTMLParser(article_url_test, ID+1)
+    for i, article_url_test in enumerate(crawler.urls):
+        parser = HTMLParser(article_url_test, i+1)
         article_parser = parser.parse()
         article_parser.save_raw()
