@@ -10,7 +10,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-from constants import CRAWLER_CONFIG_PATH, ASSETS_PATH
+from constants import CRAWLER_CONFIG_PATH, ASSETS_PATH, HEADERS
 from core_utils.article import Article
 
 
@@ -56,8 +56,7 @@ class Crawler:
 
         return urls_bs_all
 
-
-def find_articles(self):
+    def find_articles(self):
         """
         Finds articles
         """
