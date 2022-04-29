@@ -45,7 +45,7 @@ class Crawler:
 
     def _extract_url(self, article_bs):
         part_urls = []
-        all_urls_bs = article_bs.find_all('a', class_='post-pre')
+        all_urls_bs = article_bs.find_all('a', {"target": "_self"})
         for url_bs in all_urls_bs:
             url_to_article = url_bs['href']
             part_urls.append(url_to_article)
