@@ -1,4 +1,14 @@
 {
-    "seed_urls": [],
-    "total_articles_to_find_and_parse": 0
+    "seed_urls": [
+        "https://www.nn.ru/text/",
+        "https://www.nn.ru/text/?page=2",
+        "https://www.nn.ru/text/?page=3",
+        "https://www.nn.ru/text/?page=4",
+        "https://www.nn.ru/text/?page=5",
+        "https://www.nn.ru/text/?page=6",
+        "https://www.nn.ru/text/?page=7",
+        "https://www.nn.ru/text/?page=8",
+        "https://www.nn.ru/text/?page=9",
+        "https://www.nn.ru/text/?page=10"],
+    "total_articles_to_find_and_parse": 100
 }

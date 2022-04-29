@@ -94,17 +94,87 @@ def validate_dataset(path_to_validate):
     pass
 
 
+from pymystem3 import Mystem
+from pathlib import Path
+
 def main():
-    import requests
 
-    def main():
-        response = requests.get('https://lgz.ru/')
+    mystem = Mystem()
+    file_path = Path(__file__).parent / 'seminars' / '04.15.2022' / 'test.txt'
+    with file_path.open(encoding='utf-8') as file:
+        plain_text = file.read()
 
-        with open('index.html', 'w', encoding='UTF-8') as f:
-            f.write(response.text)
+    tokens = mystem.lemmatize(plain_text)
+    clear = []
+    pm = ['.', ',', '/', '!']
+    for i in tokens:
+        str_i = i.strip()
+        if str_i in pm:
+            if '' in i:
+                clear.append(i)
+            continue
+        else:
+            clear.append(i)
 
-    main()
+    for i in clear:
+        ''.join(tokens)
+    print(''.join(tokens))
+
+    plain_text_analysis = mystem.analize(plain_text)\
+    print(plain_text_analysis)
+
+    count = 0
+
+    for i in plain_text:
+        if not i.get('analysis'):
+            continue
+        gr = i.get('analysis')[0].get('gr')
+        if 'S,' in gr:
+            print(gr)
+            count+=1
+    print(count)
 
 
-if __name__ == "__main__":
-    main()
+        print ('word: ', i, gr)
+
+import re
+
+def mmain():
+    name = 'Tom Gayler, 19 y.o.'
+    p = re.compile(r'^[A-Z][a-z] \w+')
+    p = re.compile(r'\w+ \w+, \d{1,3} y\.o\.')
+
+    res=p.match(name)
+
+    if res:
+        print('String was matched')
+
+    print(res.span())
+    print(res.group())
+
+    p=re.compile(r'\w+ \w+, \d{1,3} y\.o\.')
+    res=p.match(name)
+
+    print(res.group(0))
+    print(res.group(1))
+    print(res.group(2))
+    print(res.group(3))
+
+    file_path = Path(__file__).parent / 'seminars' / '04.22.2002' / 'logdata.txt'
+    with open (file_path) as file:
+        text = file.readlines()
+    string = '146.204.224.152'
+    pattern = re.compile(r'\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}')
+    res = pattern.findall(text)
+    print(len(res))
+
+    with open(file_path) as file:
+        text = file.readlines()
+    headers_p = re.compile(r'POST|GET|PUT|DELETE')
+    res = headers_p.findall(text)
+    print(len(res))
+
+
+
+    if __name__=='__main__':
+        main()
