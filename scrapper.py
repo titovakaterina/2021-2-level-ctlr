@@ -102,12 +102,12 @@ class HTMLParser:
     def _fill_article_with_text(self, article_bs):
         self.article.text = ''
         block_1 = article_bs.find('div', class_='_25BQZ')
-        text_1 = block_1.find('p')
+        text_1 = block_1.find_all('p')
         for i in text_1:
             self.article.text += i.text
 
         block_2 = article_bs.find('div', class_='_25BQZ')
-        text_2 = block_2.find('li')
+        text_2 = block_2.find_all('li')
         for k in text_2:
             self.article.text += k.text
 
