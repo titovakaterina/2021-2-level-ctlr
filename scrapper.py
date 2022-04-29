@@ -1,5 +1,5 @@
 """
-Scrapper implementationsss
+Scrapper implementationss
 """
 
 from datetime import datetime
@@ -50,10 +50,6 @@ class Crawler:
             ending_link = url_bs['href']
             urls_bs_all.append(f'{link_beginning}{ending_link}')
 
-        for full_url in urls_bs_all:
-            if len(self.urls) < self.max_articles and full_url not in self.urls:
-                self.urls.append(full_url)
-
         return urls_bs_all
 
     def find_articles(self):
@@ -68,7 +64,10 @@ class Crawler:
 
             soup = BeautifulSoup(response.text, 'lxml')
 
-            self._extract_url(soup)
+            urls = self._extract_url(soup)
+            for url in urls:
+                if len(self.urls) < self.max_articles and url not in self.urls:
+                    self.urls.append(url)
 
 
 class HTMLParser:
