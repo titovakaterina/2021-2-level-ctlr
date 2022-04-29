@@ -104,7 +104,7 @@ class HTMLParser:
         block_1 = article_bs.find('div', class_='_25BQZ')['content']
         # text_1 = block_1.find('div')
         # text_11 = text_1.find('p')
-        text_1 = block_1.find_all('p')
+        text_1 = block_1.find('p')
         for i in text_1:
             self.article.text += i.text
 
