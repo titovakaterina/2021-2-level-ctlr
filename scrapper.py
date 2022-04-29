@@ -1,8 +1,7 @@
 """
-Scrapper implementationss
+Scrapper implementations
 """
 
-from datetime import datetime
 import random
 import json
 import shutil
@@ -86,38 +85,22 @@ class HTMLParser:
         self.article.author = 'NOT FOUND'
 
         try:
-            post_tags = article_bs.find('div', class_='post-tags')
-            topics_bs = post_tags.find_all('a', class_='post-tags__tag')
+            topics_bs = article_bs.find_all('a', {'data-test': 'archive-record-header'})
             self.article.topics = [topic_bs.text for topic_bs in topics_bs]
         except AttributeError:
             self.article.topics = 'NOT FOUND'
 
-        raw_date = article_bs.find('div', class_='post-date').text
-        months_dict = {'января': '01',
-                       'февраля': '02',
-                       'марта': '03',
-                       'апреля': '04',
-                       'мая': '05',
-                       'июня': '06',
-                       'июля': '07',
-                       'августа': '08',
-                       'сентября': '09',
-                       'октября': '10',
-                       'ноября': '11',
-                       'декабря': '12',
-                       }
-        for month in months_dict:
-            if month in raw_date:
-                raw_date = raw_date.replace(month, months_dict[month])
-        self.article.date = datetime.datetime.strptime(raw_date, '%d %m %Y, %H:%M')
+        raw_date = article_bs.find('time', {'datetime': '2022-04-28T18:01:00'}).text
+        date = raw_date[:9]
+        time = raw_date[11:15]
+        complete_date = ', '.join([date, time])
+        self.article.date = complete_date
 
-        self.article.title = article_bs.find('h1').text
-
-        all_post_list_urls_bs = article_bs.find_all('a', class_='post-pre')
+        all_post_list_urls_bs = article_bs.find_all('a', {"target": "_self"})
         print(all_post_list_urls_bs)
 
     def _fill_article_with_text(self, article_bs):
-        text = article_bs.find('div', class_='post-text').text
+        text = article_bs.find('div').text
         self.article.text = text
 
     def parse(self):
