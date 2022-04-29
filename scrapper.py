@@ -90,7 +90,7 @@ class HTMLParser:
         except AttributeError:
             self.article.topics = 'NOT FOUND'
 
-        raw_date = article_bs.find('time', {'datetime': '2022-04-28T18:01:00'}).text
+        raw_date = str(article_bs.find('time', {'datetime': '2022-04-28T18:01:00'}))
         date = raw_date[:9]
         time = raw_date[11:15]
         complete_date = ', '.join([date, time])
@@ -100,8 +100,16 @@ class HTMLParser:
         print(all_post_list_urls_bs)
 
     def _fill_article_with_text(self, article_bs):
-        text = article_bs.find('div').text
-        self.article.text = text
+        self.article.text = ''
+        block_1 = article_bs.find('div', class_='_25BQZ')
+        text_1 = block_1.find('p')
+        for i in text_1:
+            self.article.text += i.text
+
+        block_2 = article_bs.find('div', class_='_25BQZ')
+        text_2 = block_2.find('li')
+        for k in text_2:
+            self.article.text += k.text
 
     def parse(self):
         response = requests.get(url=self.article_url, headers=HEADERS)
