@@ -170,3 +170,4 @@ if __name__ == '__main__':
         parser = HTMLParser(article_url_test, i+1)
         article_parser = parser.parse()
         article_parser.save_raw()
+        ID += 1
