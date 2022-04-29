@@ -3,14 +3,16 @@ Scrapper implementationss
 """
 
 from datetime import datetime
+import random
 import json
 import shutil
+from time import sleep
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
 
-from constants import CRAWLER_CONFIG_PATH, ASSETS_PATH, HEADERS
+from constants import CRAWLER_CONFIG_PATH, ASSETS_PATH, HEADERS, HTTP_PATTERN
 from core_utils.article import Article
 
 
@@ -42,32 +44,28 @@ class Crawler:
         self.urls = []
 
     def _extract_url(self, article_bs):
-        urls_bs = article_bs.find_all('a', class_="href")
-        link_beginning = "https://www.nn.ru/text/"
-        urls_bs_all = []
+        part_urls = []
+        all_urls_bs = article_bs.find_all('a', class_='post-pre')
+        for url_bs in all_urls_bs:
+            url_to_article = url_bs['href']
+            part_urls.append(url_to_article)
+        full_urls = [HTTP_PATTERN + part_url for part_url in part_urls]
 
-        for url_bs in urls_bs:
-            ending_link = url_bs['href']
-            urls_bs_all.append(f'{link_beginning}{ending_link}')
-
-        return urls_bs_all
+        for full_url in full_urls:
+            if len(self.urls) < self.max_articles and full_url not in self.urls:
+                self.urls.append(full_url)
 
     def find_articles(self):
         """
         Finds articles
         """
         for seed_url in self.seed_urls:
-            response = requests.get(url=seed_url)
-
+            sleep(random.randint(1, 5))
+            response = requests.get(url=seed_url, headers=HEADERS)
             if not response.ok:
                 continue
-
             soup = BeautifulSoup(response.text, 'lxml')
-
-            urls = self._extract_url(soup)
-            for url in urls:
-                if len(self.urls) < self.max_articles and url not in self.urls:
-                    self.urls.append(url)
+            self._extract_url(soup)
 
 
 class HTMLParser:
