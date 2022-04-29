@@ -101,7 +101,7 @@ class HTMLParser:
 
     def _fill_article_with_text(self, article_bs):
         self.article.text = ''
-        block_1 = article_bs.find(class_='_25BQZ')
+        block_1 = article_bs.find_all('div', {'class': '_25BQZ'})[0]
         text_1 = block_1.find('p')
         # text_1 = block_1.find('div')
         # text_11 = text_1.find('p')
@@ -165,15 +165,12 @@ def validate_config(crawler_path):
 
 
 if __name__ == '__main__':
-    seed_urls_main, total_articles_main = validate_config(CRAWLER_CONFIG_PATH)
+    seed_links, mx_articles = validate_config(CRAWLER_CONFIG_PATH)
     prepare_environment(ASSETS_PATH)
-
-    crawler = Crawler(seed_urls_main, total_articles_main)
+    crawler = Crawler(seed_urls=seed_links, max_articles=mx_articles)
     crawler.find_articles()
 
-    ID = 1
-    for article_url_main in crawler.urls:
-        article_parser = HTMLParser(article_url=article_url_main, article_id=ID)
-        article = article_parser.parse()
+    for index, a_text in enumerate(crawler.urls):
+        parser = HTMLParser(a_text, index + 1)
+        article = parser.parse()
         article.save_raw()
-        ID += 1
