@@ -55,6 +55,8 @@ class Crawler:
             if len(self.urls) < self.max_articles and full_url not in self.urls:
                 self.urls.append(full_url)
 
+        return full_urls
+
     def find_articles(self):
         """
         Finds articles
@@ -64,8 +66,14 @@ class Crawler:
             response = requests.get(url=seed_url, headers=HEADERS)
             if not response.ok:
                 continue
+
             soup = BeautifulSoup(response.text, 'lxml')
-            self._extract_url(soup)
+
+            urls = self._extract_url(soup)
+            for url in urls:
+                if len(self.urls) < self.max_articles:
+                    if url not in self.urls:
+                        self.urls.append(url)
 
 
 class HTMLParser:
